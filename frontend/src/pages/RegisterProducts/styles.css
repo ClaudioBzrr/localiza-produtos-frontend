@@ -1,0 +1,119 @@
+#main-register{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#title-register{
+    text-align: center;
+    font-size: 30px;
+}
+#box-register{
+    font-size: 20px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,0.20);
+    
+}
+
+#form-register{
+    display: grid;
+    grid-template:
+    "label-sku input-sku"
+    "label-desc input-desc"
+    "label-col input-col"
+    "button button"
+}  
+
+#label-sku{
+    grid-area: label-sku;
+}
+
+#input-sku{
+    grid-area: input-sku;
+}
+
+
+#label-desc{
+    grid-area: label-desc;
+}
+
+
+#input-desc{
+    grid-area: input-desc;
+}
+
+#label-col{
+    grid-area: label-col;
+}
+
+#input-col{
+    grid-area: input-col;
+}
+
+#button-register{
+    grid-area:button;
+    width: 30%;
+    height: 50px;
+    justify-self: center;
+    margin-bottom: 3em;
+    border-radius: 15px;
+    border: none;
+    margin-top: 30px;
+    font-size: 20px;
+    font-family: 'Oswald';
+    background-color: darkgrey;
+   
+
+}
+
+#button-register:hover{
+    background-color:#acc0ff;
+}
+
+#button-register:focus{
+    outline: none;
+    background-color:#acc0ff;
+}
+
+#form-register label{
+    width: 30%;
+    justify-self: flex-end;
+}
+
+#form-register input{
+    width: 50%;
+    justify-self: flex-start;
+    border-radius: 10px;
+    border: 1px solid gray;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#form-register input:target,
+#form-register input:focus{
+    outline: none;
+}
+
+#form-register label,
+#form-register input{
+    margin-top: 10px;
+}
+
+
+#back-link{
+    text-decoration: none;
+    color: red;
+    margin: 5px auto auto 5px;
+}
+
+#back-link:hover{
+    color: #acc0ff
+}
+
+
+

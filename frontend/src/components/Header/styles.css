@@ -1,0 +1,48 @@
+#header{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    background-color: #ffff;
+    flex-direction: row;
+    justify-content: center;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,0.20) ;
+    position: fixed;
+    top: 0;
+
+}
+
+#lista-header{
+    display:  flex;
+    width: 50%;
+    flex-direction: row;
+    list-style: none;
+    justify-content:space-around;
+    align-items: center;
+
+}
+
+#lista-header a,
+#lista-header a:hover,
+#lista-header a:link,
+#lista-header a:visited,
+#lista-header a:active{
+    color: inherit;
+    list-style: none;
+    text-decoration: none;
+}
+
+#lista-header a:focus{
+    outline: none;
+}
+
+#lista-header li{
+   font-size: 2em;
+   padding: 5px;
+   border-radius: 15px;
+
+   
+}
+
+#lista-header li:hover{
+    background-color: #acc0ff;
+}
