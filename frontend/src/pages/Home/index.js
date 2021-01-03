@@ -41,7 +41,7 @@ export default function Home() {
             }
         }else{
             try{
-                await api.get(`products/search/${arg}`).then(response => response.data == [''] ? swal({icon:'error',title:'Produto não encontrado'}):setProducts(response.data))
+                await api.get(`products/search/${arg}`).then(response => response.data === [''] ? swal({icon:'error',title:'Produto não encontrado'}):setProducts(response.data))
             }catch(err){
                 swal({
                     icon:'error',
@@ -69,12 +69,18 @@ export default function Home() {
     }
 
 
+
+    function edit(sku){
+        setProducts(products.filter(product => product.sku_product === sku))
+        setEditable(!editable)
+    }
+
     //função pra salvar produtos(através do contentEditable) sem ter que ir para outra página.
     async function HandleUpdateProducts(sku){
         const data = {desc_product,column_product}
 
             try{
-    
+                
                 await api.put(`products/${sku}`,data)
                 swal({
                     icon:"success",
@@ -107,6 +113,7 @@ export default function Home() {
                 </div>
                 <button id="botao-buscar" 
                 type='submit'
+                disabled ={editable === true ? true : false}
                 >Buscar</button>
             </div>
             </form>
@@ -138,21 +145,23 @@ export default function Home() {
 
                         <div id="item-desc"
                         suppressContentEditableWarning={true}
-                        onBlur={e  => e.target.innerText ===""? setDesc_product(product.desc_product):setDesc_product(e.target.innerText)}
+                        onBlur={e  => e.target.innerText ===product.desc_product? setDesc_product(product.desc_product):setDesc_product(e.target.innerText)}
                         contentEditable={editable}
                         >{product.desc_product}</div>
                         
                         <div id="item-col"
                         suppressContentEditableWarning={true}
-                        onBlur={e  => desc_product === ""? setDesc_product(product.desc_product):setColumn_product(e.target.innerText)} 
+                        onBlur={e  => column_product === product.column_product? setColumn_product(product.column_product):setColumn_product(e.target.innerText)} 
                         contentEditable={editable}
                         >{product.column_product}</div>
 
 
                         <div id="item-act">
-                            <Trash onClick={() => handleDeleteProducts(product.sku_product)} className="act"/>
-                            <Edit onClick={()=>setEditable(!editable)} className="act"/>
-                            <Save onClick={()=>HandleUpdateProducts(product.sku_product)} className="act"/>
+                                <Trash onClick={() => handleDeleteProducts(product.sku_product)} className="act"/>
+                            <Edit onClick={()=>edit(product.sku_product)} className="act"/>
+                            <Save
+                            visibility={editable ===true ? 'visible':'hidden'}  
+                            onClick={()=>HandleUpdateProducts(product.sku_product)} className="act"/>
 
                         </div>
                     </li>
