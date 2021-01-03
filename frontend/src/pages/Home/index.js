@@ -8,10 +8,11 @@ import api from '../../services/api'
 import swal from 'sweetalert'
 
 
+
 export default function Home() {
 
     // declaração de contantes
-
+    const [loading,setLoading] = useState(false)
     const  [arg,setArg] =  useState('')
     const  [desc_product,setDesc_product] =  useState('')
     const  [column_product,setColumn_product] =  useState('')
@@ -28,10 +29,12 @@ export default function Home() {
 
     // função para buscar produtos
     async function handleSearchProducts(e){
+        setLoading(true)
         e.preventDefault()
         if(arg ===''){
             try{
                 await api.get('/products').then(response => setProducts(response.data))
+                setLoading(false)
             }catch(err){
                 swal({
                     icon:'error',
@@ -42,6 +45,7 @@ export default function Home() {
         }else{
             try{
                 await api.get(`products/search/${arg}`).then(response => response.data === [''] ? swal({icon:'error',title:'Produto não encontrado'}):setProducts(response.data))
+                setLoading(false)
             }catch(err){
                 swal({
                     icon:'error',
@@ -50,7 +54,9 @@ export default function Home() {
                 })
             }
         }
+    
     }
+
 
 
     //função para deletar os produtos
@@ -71,6 +77,7 @@ export default function Home() {
 
 
 
+    //função que filtra o elemento para editar
     function edit(sku){
         setProducts(products.filter(product => product.sku_product === sku))
         setEditable(!editable)
@@ -78,19 +85,20 @@ export default function Home() {
 
     //função pra salvar produtos(através do contentEditable) sem ter que ir para outra página.
     async function HandleUpdateProducts(sku){
+        setEditable(!editable)
         const data = {desc_product,column_product}
 
             try{
+                    
+                    await api.put(`products/${sku}`,data)
+                    swal({
+                        icon:"success",
+                        title:"Alterações salvas com sucesso"
+                    })
                 
-                await api.put(`products/${sku}`,data)
-                swal({
-                    icon:"success",
-                    title:"Alterações salvas com sucesso"
-                })
             }catch(err){
                 alert(err)
             }
-            setEditable(!editable)
         
     }
     
@@ -114,8 +122,8 @@ export default function Home() {
                 </div>
                 <button id="botao-buscar" 
                 type='submit'
-                disabled ={editable === true ? true : false}
-                >Buscar</button>
+                disabled ={editable || loading === true ? true : false}
+                >{loading ? 'Carregando' : 'Buscar'}</button>
             </div>
             </form>
 
@@ -134,6 +142,15 @@ export default function Home() {
 
 
                     {
+
+                        loading ? (<div className="sk-chase">
+                        <div className="sk-chase-dot"></div>
+                        <div className="sk-chase-dot"></div>
+                        <div className="sk-chase-dot"></div>
+                        <div className="sk-chase-dot"></div>
+                        <div className="sk-chase-dot"></div>
+                        <div className="sk-chase-dot"></div>
+                      </div>) : 
                         products.map(product => 
       
                         
@@ -146,13 +163,13 @@ export default function Home() {
 
                         <div id="item-desc"
                         suppressContentEditableWarning={true}
-                        onBlur={e  => e.target.innerText ===product.desc_product? setDesc_product(product.desc_product):setDesc_product(e.target.innerText)}
+                        onBlur={e  => e.target.innerHTML ==="" ? setDesc_product(product.desc_product) :setDesc_product(e.target.innerHTML)}
                         contentEditable={editable}
                         >{product.desc_product}</div>
                         
                         <div id="item-col"
                         suppressContentEditableWarning={true}
-                        onBlur={e  => e.target.innerText === product.column_product? setColumn_product(product.column_product):setColumn_product(e.target.innerText)} 
+                        onBlur={e  => e.target.innerHTML ==="" ? setColumn_product(product.column_product) : setColumn_product(e.target.innerHTML)}
                         contentEditable={editable}
                         >{product.column_product}</div>
 
