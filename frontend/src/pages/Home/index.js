@@ -11,6 +11,7 @@ import swal from 'sweetalert'
 export default function Home() {
 
     // declaração de contantes
+
     const  [arg,setArg] =  useState('')
     const  [desc_product,setDesc_product] =  useState('')
     const  [column_product,setColumn_product] =  useState('')
@@ -28,7 +29,6 @@ export default function Home() {
     // função para buscar produtos
     async function handleSearchProducts(e){
         e.preventDefault()
-
         if(arg ===''){
             try{
                 await api.get('/products').then(response => setProducts(response.data))
@@ -51,6 +51,7 @@ export default function Home() {
             }
         }
     }
+
 
     //função para deletar os produtos
     function handleDeleteProducts(sku_product){
@@ -151,7 +152,7 @@ export default function Home() {
                         
                         <div id="item-col"
                         suppressContentEditableWarning={true}
-                        onBlur={e  => column_product === product.column_product? setColumn_product(product.column_product):setColumn_product(e.target.innerText)} 
+                        onBlur={e  => e.target.innerText === product.column_product? setColumn_product(product.column_product):setColumn_product(e.target.innerText)} 
                         contentEditable={editable}
                         >{product.column_product}</div>
 
