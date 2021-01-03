@@ -117,3 +117,76 @@
 
 
 
+@media(max-width:1299px){
+
+    #box-register{
+        width: 80%;
+        height: 80%;
+    }
+
+
+}
+
+@media(max-width:822px){
+    #form-register label,#form-register input{
+        width: 40%;
+    }
+    #title-register{
+        font-size:25px;
+    }
+
+    #button-register{
+        font-size: 17px;
+    }
+}
+
+
+
+@media(max-width:649px){
+    #form-register label,
+    #form-register input{
+        width: 80%;
+    }
+
+    
+}
+
+@media(max-width:400px){
+    #form-register label,
+    #form-register input{
+       font-size:13px;
+       width: 85%;
+    }
+    #title-register{
+        font-size: 20px;
+    }
+    #button-register{
+        font-size: 15px;
+    }
+    #back-link{
+        font-size: 13px;
+    }
+
+ }
+
+
+@media(max-width: 280px){
+    #form-register label,
+    #form-register input{
+        font-size:12px;
+        width: 90%;
+    }
+    #title-register{
+        font-size: 15px;
+    }
+    #button-register{
+        font-size: 12px;
+    }
+
+    #back-link{
+         font-size: 10px;
+    }
+    
+}
+
+

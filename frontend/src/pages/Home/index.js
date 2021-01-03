@@ -20,13 +20,6 @@ export default function Home() {
     const [editable,setEditable] =  useState(false)
 
     
-    //carregando os produtos
-    // useEffect(()=>{
-    //     api.get('products').then(response => setProducts(response.data))
-
-    // })
-
-
     // função para buscar produtos
     async function handleSearchProducts(e){
         setLoading(true)
@@ -56,8 +49,6 @@ export default function Home() {
         }
     
     }
-
-
 
     //função para deletar os produtos
     function handleDeleteProducts(sku_product){

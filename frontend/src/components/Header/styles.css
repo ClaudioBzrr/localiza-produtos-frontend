@@ -46,3 +46,26 @@
 #lista-header li:hover{
     background-color: #acc0ff;
 }
+
+
+@media(max-width : 746px){
+    #lista-header{
+        font-size: 10px;
+    }
+}
+
+
+@media(max-width:320px){
+    #lista-header{
+        font-size : 13px;
+        width: 100%;
+    }
+}
+@media(max-width:280px){
+    #lista-header{
+        font-size : 10px;
+        width: 100%;
+    }
+}
+
+
