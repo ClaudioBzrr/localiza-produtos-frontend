@@ -20,18 +20,20 @@
 }
 
 #form-register{
+    width: 50%;
     display: grid;
+    align-self: center;
     grid-template:
-    "label-sku input-sku"
-    "label-desc input-desc"
-    "label-col input-col"
-    "button button"
+    "label-sku input-sku  input-sku input-sku input-sku input-sku"
+    "label-desc input-desc  input-desc  input-desc input-desc input-desc"
+    "label-lane input-lane  label-col input-col  label-stand input-stand "
+    "button button button button button button"
+    /100px 50px 1fr 50px 1fr 50px
 }  
 
 #label-sku{
     grid-area: label-sku;
 }
-
 #input-sku{
     grid-area: input-sku;
 }
@@ -40,18 +42,45 @@
 #label-desc{
     grid-area: label-desc;
 }
-
-
 #input-desc{
     grid-area: input-desc;
 }
 
+
+
+#label-lane{
+    grid-area: label-lane;
+}
+#input-lane{
+    grid-area: input-lane;
+}
+
+
+
 #label-col{
     grid-area: label-col;
 }
-
 #input-col{
     grid-area: input-col;
+}
+
+
+
+#label-stand{
+    grid-area: label-stand;
+}
+#input-stand{
+    grid-area: input-stand;
+}
+
+
+#label-lane label, #label-sku label, #label-desc label{
+    text-align: start;
+}
+
+
+#label-col, #label-stand{
+    text-align: center;
 }
 
 #button-register{
@@ -80,13 +109,14 @@
 }
 
 #form-register label{
-    width: 30%;
-    justify-self: flex-end;
+    width: 100%;
+    justify-self: center;
+    
 }
 
 #form-register input{
-    width: 50%;
-    justify-self: flex-start;
+    width: 100%;
+    justify-self:center ;
     border-radius: 10px;
     border: 1px solid gray;
     text-align: center;

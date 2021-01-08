@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL:'https://localiza-produtos-backend.herokuapp.com/'
+    baseURL:'http://localhost:5000/'
 })
 
 
