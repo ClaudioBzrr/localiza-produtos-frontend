@@ -11,7 +11,7 @@ import swal from 'sweetalert'
 
 export default function Home() {
 
-    // declaração de contantes
+    // declaração de constantes
     const [loading,setLoading] = useState(false)
     const  [arg,setArg] =  useState('')
     const [products,setProducts] =  useState([])
@@ -26,16 +26,19 @@ export default function Home() {
             try{
                 await api.get('/products').then(response => setProducts(response.data))
                 setLoading(false)
+
             }catch(err){
                 swal({
                     icon:'error',
                     title:'Erro ao procurar produto',
                     text:`${err}`
                 })
+
             }
+
         }else{
             try{
-                await api.get(`products/search/${arg}`).then(response => response.data === [''] ? swal({icon:'error',title:'Produto não encontrado'}):setProducts(response.data))
+                await api.get(`products/search/${arg}`).then(response => response.data =='' ? swal({icon:'error',title:'Produto não encontrado'}):setProducts(response.data))
                 setLoading(false)
             }catch(err){
                 swal({
