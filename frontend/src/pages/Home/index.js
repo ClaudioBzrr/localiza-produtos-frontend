@@ -6,6 +6,7 @@ import Header from './../../components/Header'
 import {FiSearch as Search, FiTrash2 as Trash, FiEye as Eye, FiEdit as Edit} from 'react-icons/fi'
 import api from '../../services/api'
 import swal from 'sweetalert'
+import {Dialog } from '@material-ui/core'
 
 
 
@@ -98,6 +99,7 @@ export default function Home() {
                 <ul id="list-heading">
                     <li id="list-sku-heading">Código</li>
                     <li id="list-desc-heading">Descrição</li>
+                    <li id="list-col-heading">Coluna</li>
                     <li id="list-act-heading">Ação</li>
                 </ul>
             </div>
@@ -127,11 +129,11 @@ export default function Home() {
                     <li id="list-items" key={product.sku_product}>
                         <div id="item-sku" >{product.sku_product}</div>
                         <div id="item-desc">{product.desc_product}</div>
+                        <div id="item-column">{product.column_product}</div>
+
 
 
                         <div id="item-act">
-
-                            <Eye className='act'/>
                             <Edit className='act'/>
                             <Trash className='act'
                             onClick={() => handleDeleteProducts(product.sku_product)}

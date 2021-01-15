@@ -97,7 +97,6 @@
     flex-direction: row;
     justify-content: space-between;
     text-align: center;
-    text-align: center;
     border-bottom: 1px solid gray;
 }
 
@@ -106,6 +105,8 @@
     width: 30%;
     text-align: center;
     align-self: center;
+    word-wrap: break-word;
+
 }
 
 #data{
@@ -128,16 +129,25 @@
 }
 
 
- #list-items #item-sku, #list-items #item-desc{
-    text-align: center;
-    word-wrap: break-word;
 
- }
 
 
  #items :first-child{
    margin-top: 15px;
  }
+
+
+ #list-items #item-column{
+   color: red;
+   font-weight: bold;
+ }
+
+
+ #item-act{
+    width: 100%;
+ }
+
+
 
 
  

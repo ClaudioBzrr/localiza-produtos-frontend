@@ -20,8 +20,7 @@
 }
 
 #form-register{
-    margin-top: 5%;
-    width: 40%;
+    width: 70%;
     align-self: center;
     display: flex;
     flex-direction: column;
@@ -29,11 +28,14 @@
 }  
 
 
-#label-sku label, #label-desc label, #label-col label{
+#label-lane label, #label-sku label, #label-desc label{
     text-align: start;
-    width: 15%;
 }
 
+
+#label-col, #label-stand{
+    text-align: center;
+}
 
 #button-register{
     grid-area:button;
@@ -61,9 +63,15 @@
     background-color:#acc0ff;
 }
 
+#form-register label{
+    width: 100%;
+    align-self: center;
+    text-align: center;
+    
+}
 
 #form-register input{
-    width: 100%;
+    width: 50%;
     justify-self:center ;
     border-radius: 10px;
     height: 30px;
@@ -131,6 +139,50 @@
 }
 
 
+#form-register #label-sku{
+    grid-area:label-sku;
+    text-align: start;
+    margin-left:17%;
+
+}
+
+#form-register #input-sku{
+    grid-area:input-sku;
+    width: 100%;
+}
+
+#form-register #label-desc{
+    grid-area:label-desc;
+    text-align: start;
+    margin-left:17%;
+
+}
+
+#form-register #input-desc{
+    grid-area:input-desc;
+    width: 100%;
+}
+
+#remove-input{
+    width: 50px;
+    height: 40px;
+    margin-left: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+
+}
+
+
+
+
+
+.plus-locations{
+    align-self: center;
+    justify-self: center;
+    vertical-align: middle;
+    margin-right: 5px;
+}
 
 
 @media(max-width:1299px){
