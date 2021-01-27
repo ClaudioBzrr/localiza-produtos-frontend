@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import {useHistory} from 'react-router-dom'
 import './../../assets/styles/global.css'
 import './styles.css'
@@ -26,8 +26,8 @@ export default function Home() {
 
 // configurações do modal de edição de produtos
 
-    const handleOpen = () => {
-
+    const handleOpen = (sku) => {
+        setProducts(products.filter(product => product.sku_product === sku))
         setOpen(true);
       };
     
@@ -103,14 +103,14 @@ export default function Home() {
 
     async function handleEditProducts(e,sku_product){
         e.preventDefault()
+
         const dataEdit ={desc_product, column_product}
         await api.put(`products/${sku_product}`,dataEdit)
         handleClose()
         swal({icon:'success',title:'Produto alterado com sucesso'})
-
-
-
-
+        setLoading(true)
+        await api.get(`products/search/${sku_product}`).then(response => setProducts(response.data))
+        setLoading(false)
         
         
     }
@@ -159,14 +159,20 @@ export default function Home() {
                     {
 
                         loading ? (
-                        <div className="sk-chase">
-                            <div className="sk-chase-dot"></div>
-                            <div className="sk-chase-dot"></div>
-                            <div className="sk-chase-dot"></div>
-                            <div className="sk-chase-dot"></div>
-                            <div className="sk-chase-dot"></div>
-                            <div className="sk-chase-dot"></div>
-                      </div>
+                            <div class="sk-fading-circle">
+                                <div class="sk-circle1 sk-circle"></div>
+                                <div class="sk-circle2 sk-circle"></div>
+                                <div class="sk-circle3 sk-circle"></div>
+                                <div class="sk-circle4 sk-circle"></div>
+                                <div class="sk-circle5 sk-circle"></div>
+                                <div class="sk-circle6 sk-circle"></div>
+                                <div class="sk-circle7 sk-circle"></div>
+                                <div class="sk-circle8 sk-circle"></div>
+                                <div class="sk-circle9 sk-circle"></div>
+                                <div class="sk-circle10 sk-circle"></div>
+                                <div class="sk-circle11 sk-circle"></div>
+                                <div class="sk-circle12 sk-circle"></div>
+                            </div>
                       ) : 
                         products.map(product => 
       
@@ -183,21 +189,23 @@ export default function Home() {
 
 
                         <div id="item-act">
-                            <Edit className='act' onClick={handleOpen}/>
+                            <Edit className='act' onClick={() =>handleOpen(product.sku_product)}/>
+
                                     <Dialog open={open} onClose={handleClose} id="modal-edit" >
 
                                         <DialogTitle>Editar produto</DialogTitle>
 
                                         <form onSubmit={(e) => handleEditProducts(e,product.sku_product)}>
 
+
                                             <DialogContent>
                                                 <TextField label="Código" defaultValue={product.sku_product} inputProps={{ readOnly: true }} disabled={true} fullWidth margin="dense" />
 
                                                 <TextField label="Descrição" defaultValue={product.desc_product} fullWidth margin="dense"
-                                                    onChange={e => e.target.value =='' ? setDesc_product(product.desc_product):setDesc_product(e.target.value)} />
+                                                    onChange={e =>  setDesc_product(e.target.value)} />
 
                                                 <TextField label="Coluna" defaultValue={product.column_product} fullWidth margin="dense"
-                                                    onChange={e => e.target.value =='' ?setColumn_product(product.column_product):setColumn_product(e.target.value) } />
+                                                    onChange={e => setColumn_product(e.target.value)  }  />
                                             </DialogContent>
 
                                             <DialogActions>
