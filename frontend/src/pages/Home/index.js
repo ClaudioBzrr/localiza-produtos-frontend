@@ -1,20 +1,18 @@
 import React from 'react'
-import {useState,useEffect} from 'react'
-import {useHistory} from 'react-router-dom'
+import {useState} from 'react'
 import './../../assets/styles/global.css'
 import './styles.css'
 import Header from './../../components/Header'
 import {FiSearch as Search, FiTrash2 as Trash, FiEdit as Edit} from 'react-icons/fi'
 import api from '../../services/api'
 import swal from 'sweetalert'
-import {Dialog, DialogTitle,DialogContent,DialogActions ,Button,TextField, makeStyles} from '@material-ui/core'
+import {Dialog, DialogTitle,DialogContent,DialogActions ,Button,TextField} from '@material-ui/core'
 
 
 
 export default function Home() {
 
     // declaração de constantes
-    const history =  useHistory()
     const [open,setOpen] =  useState(false)
     const [loading,setLoading] = useState(false)
     const  [arg,setArg] =  useState('')
@@ -103,14 +101,19 @@ export default function Home() {
 
     async function handleEditProducts(e,sku_product){
         e.preventDefault()
-
-        const dataEdit ={desc_product, column_product}
-        await api.put(`products/${sku_product}`,dataEdit)
-        handleClose()
-        swal({icon:'success',title:'Produto alterado com sucesso'})
-        setLoading(true)
-        await api.get(`products/search/${sku_product}`).then(response => setProducts(response.data))
-        setLoading(false)
+        if(desc_product ==='' || column_product ===''){
+            swal({icon:'info',title:'Produto com valores em branco'})
+        }else{
+            const dataEdit ={desc_product, column_product}
+            await api.put(`products/${sku_product}`,dataEdit)
+            handleClose()
+            swal({icon:'success',title:'Produto alterado com sucesso'})
+            setLoading(true)
+            await api.get(`products/search/${sku_product}`).then(response => setProducts(response.data))
+            setLoading(false)
+            setDesc_product('')
+            setColumn_product('')
+        }
         
         
     }
@@ -159,19 +162,19 @@ export default function Home() {
                     {
 
                         loading ? (
-                            <div class="sk-fading-circle">
-                                <div class="sk-circle1 sk-circle"></div>
-                                <div class="sk-circle2 sk-circle"></div>
-                                <div class="sk-circle3 sk-circle"></div>
-                                <div class="sk-circle4 sk-circle"></div>
-                                <div class="sk-circle5 sk-circle"></div>
-                                <div class="sk-circle6 sk-circle"></div>
-                                <div class="sk-circle7 sk-circle"></div>
-                                <div class="sk-circle8 sk-circle"></div>
-                                <div class="sk-circle9 sk-circle"></div>
-                                <div class="sk-circle10 sk-circle"></div>
-                                <div class="sk-circle11 sk-circle"></div>
-                                <div class="sk-circle12 sk-circle"></div>
+                            <div className="sk-fading-circle">
+                                <div className="sk-circle1 sk-circle"></div>
+                                <div className="sk-circle2 sk-circle"></div>
+                                <div className="sk-circle3 sk-circle"></div>
+                                <div className="sk-circle4 sk-circle"></div>
+                                <div className="sk-circle5 sk-circle"></div>
+                                <div className="sk-circle6 sk-circle"></div>
+                                <div className="sk-circle7 sk-circle"></div>
+                                <div className="sk-circle8 sk-circle"></div>
+                                <div className="sk-circle9 sk-circle"></div>
+                                <div className="sk-circle10 sk-circle"></div>
+                                <div className="sk-circle11 sk-circle"></div>
+                                <div className="sk-circle12 sk-circle"></div>
                             </div>
                       ) : 
                         products.map(product => 
